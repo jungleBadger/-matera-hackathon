@@ -52,6 +52,25 @@
                         }
                     });
                 });
+            },
+            "getAccountStatement": function (accountId) {
+                var self = this;
+                return new Promise(function (resolve, reject) {
+                    request({
+                        "url": url + apiAccount + accountId + "/statement",
+                        "method": "GET",
+                        "headers": {
+                            "Api-Access-Key": apiAccessKey,
+                            "Transaction-Hash": self.generateHash(accountId)
+                        }
+                    }, function (error, response, body) {
+                        if (!error) {
+                            resolve(response);
+                        } else {
+                            reject(error);
+                        }
+                    });
+                });
             }
         };
     }
