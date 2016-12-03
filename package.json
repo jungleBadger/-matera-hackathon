@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,9 @@
     "morgan": "^1.7.0",
     "request": "^2.79.0",
     "socket.io": "^1.7.1"
+  },
+  "engines": {
+    "node": "4.x"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.3",
