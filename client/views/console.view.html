@@ -28,9 +28,37 @@
 
         <main id="tst">
             <div data-content="1" class="contentx active">
-                <header>
-                    <h2>Dashboard</h2>
-                </header>
+                <div class="row">
+                    <div class="col-10 column">
+                        <header class="col-12">
+                            <h2>Dashboard</h2>
+                        </header>
+                        <div class="col-12 driverHeader">
+                            <div class="col-3 driverText">
+                                <label for="">Full Name</label>
+                                <h2></h2>
+                            </div>
+                            <div class="col-3 driverText">
+                                blablabla
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2" id="userList">
+                        <div class="drivers">
+                            <label for="">Lista de Motoristas</label>
+                        </div>
+                        <div class="drivers">
+                            <img src="" alt="Img" class="col-4"/>
+                            <div class="driverInfo col-8">
+                                <label for="">Name</label>
+                                <label for="">Something</label>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
 
             <div data-content="2" class="contentx">
@@ -41,33 +69,37 @@
                     <div>
                         <section class="firstGroup">
                             <label for="driverName">Nome:</label>
-                            <input type="text" name="driverName" id="fullName" />
+                            <input type="text" name="driverName" id="driverName" required>
                             <label for="phoneNumber">Telefone</label>
-                            <input type="text" name="phoneNumber" value="" id="phoneNumber">
+                            <input type="text" name="phoneNumber" value="" id="phoneNumber" class="smallerField" required>
                             <label for="phoneNumber">Celular</label>
-                            <input type="text" name="cellPhone" value="" id="cellPhone">
+                            <input type="text" name="cellPhone" value="" id="cellPhone" class="smallerField" required>
                             <label for="email">Email</label>
-                            <input type="text" name="email" value="" id="email">
+                            <input type="text" name="email" value="" id="email" required>
                             <label for="">CPF</label>
-                            <input type="text" name="cpf" value="" id="cpf">
+                            <input type="text" name="cpf" value="" id="cpf" class="smallerField" required>
                         </section>
 
                         <label for="">Endereço</label>
-                        <input type="text" name="address" value="">
+                        <input type="text" name="address" value="" id="address" required>
+
                         <label for="">Número</label>
-                        <input type="text" name="housenumber" value="" id="houseNumber">
+                        <input type="text" name="houseNumber" value="" id="houseNumber" required>
                         <label for="">Complemento</label>
-                        <input type="text" name="name" value="" id="">
+                        <input type="text" name="complement" value="" id="complement" required>
+
+
                         <label for="">Bairro</label>
-                        <input type="text" name="name" value="">
+                        <input type="text" name="neighborhood" value="" id="neighborhood" required>
                         <label for="">Cidade</label>
-                        <input type="text" name="name" value="">
+                        <input type="text" name="city" value="" id="city" required>
                         <label for="">Estado</label>
-                        <input type="text" name="name" value="">
+                        <input type="text" name="state" value="" id="state" required>
                         <label for="">CEP</label>
-                        <input type="text" name="name" value="">
+                        <input type="text" name="zipCode" value="" id="zipCode" required>
                         <label for="country">País</label>
-                        <input type="text" name="country" value="">
+                        <input type="text" name="country" value="" id="country" required>
+
 
 
                     </div>

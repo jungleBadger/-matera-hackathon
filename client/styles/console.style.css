@@ -58,15 +58,12 @@ body main {
 }
 
 body main header {
-    margin-top: 10px;
-    border-radius: 5px;
+    height: 55px;
+    border-radius: 2px;
     background-color: #ECF0F2;
-    width: 95%;
     display: flex;
     align-items: center;
     box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.20);
-    /*justify-content: center;*/
-    margin-bottom: 10px;
 }
 
 
@@ -90,7 +87,14 @@ h2 {
 
 .active {
     display: block !important;
-    width: 90%;
+    width: 100%;
+
+}
+
+a {
+    text-decoration: none;
+    color: white;
+
 }
 
 #insertDriverForm {
@@ -101,37 +105,133 @@ h2 {
 #insertDriverForm div {
     display: flex;
     flex-direction: column;
-    height: 90%;
+    height: 85%;
     width: 80%;
 }
 
 #insertDriverForm div input {
     width: 200px;
     height: 30px;
+    border-radius: 3px;
+    border: 1px solid lightgray;
+    font-size: 14px;
 }
 
 .firstGroup {
     display: flex;
     flex-direction: column;
-
 }
 
 body div form div section #fullName {
     width: 250px;
 }
 
-body div form div section #phoneNumber {
-    width: 100px;
-}
-
-body div form div section #cellPhone {
-    width: 100px;
-}
-
-body div form div section #cpf {
-    width: 100px;
+#insertDriverForm div section .smallerField {
+    width: 105px;
+    padding-left: 6px;
 }
 
 body div form div #houseNumber {
     width: 50px;
+}
+
+input#insertDriver {
+    height: 40px;
+    background-color: gray;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-size: 16px;
+    font-weight: lighter;
+}
+
+
+.row {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+div#userList {
+    height: 100%;
+    background-color: rgb(170, 170, 170);
+
+}
+
+.drivers {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.driverInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.driverHeader {
+    background-color: red;
+    height: 140px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.driverText {
+    background-color: blue;
+    height: 100%;
 }
