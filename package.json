@@ -1,0 +1,36 @@
+{
+  "name": "xamahacka",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jungleBadger/-matera-hackathon.git"
+  },
+  "keywords": [
+    "xama"
+  ],
+  "author": "xamateam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jungleBadger/-matera-hackathon/issues"
+  },
+  "homepage": "https://github.com/jungleBadger/-matera-hackathon#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cfenv": "^1.0.3",
+    "compression": "^1.6.2",
+    "consolidate": "^0.14.5",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.2",
+    "dotenv": "^2.0.0",
+    "ejs": "^2.5.3",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "request": "^2.79.0",
+    "socket.io": "^1.7.1"
+  }
+}
