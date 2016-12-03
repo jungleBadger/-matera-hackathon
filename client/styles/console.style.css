@@ -79,6 +79,12 @@ h2 {
     font-weight: lighter;
 }
 
+h3 {
+    margin: 0;
+    padding: 10px;
+    font-weight: lighter;
+}
+
 .contentx {
     display: none;
     flex: 1;
@@ -234,4 +240,27 @@ div#userList {
 .driverText {
     background-color: blue;
     height: 100%;
+}
+
+.driverFeed {
+    background-color: yellow;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.driverAlerts {
+    background-color: green;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.driverMap {
+    background-color: pink;
+    height: 100%;
+}
+
+.alertList {
+    height: 20px;
 }
