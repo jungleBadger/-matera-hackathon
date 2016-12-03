@@ -22,7 +22,6 @@
                         "auth-key": process.env.IOTF_KEY || JSON.parse(process.env.VCAP_SERVICES)["iotf-service"][0].credentials.apiKey,
                         "auth-token": process.env.IOTF_TOKEN || JSON.parse(process.env.VCAP_SERVICES)["iotf-service"][0].credentials.apiToken
                     };
-                    console.log(appClientConfig);
                     var mqttApp = new mqtt.IotfApplication(appClientConfig);
                     mqttApp.connect();
 

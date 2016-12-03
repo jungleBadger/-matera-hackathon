@@ -53,7 +53,7 @@
     app.set("view engine", "html");
 
     require("./server/helpers/passport")(passport);
-    require("./server/routes/index.js")(app, io, request, materaMP, iotf_connections, iotf_configs);
+    require("./server/routes/index.js")(app, io, request, materaMP, iotf_connections, iotf_configs, passport);
 
     server.listen(appEnv.port, "0.0.0.0", function () {
         console.log("server starting on " + appEnv.url);
