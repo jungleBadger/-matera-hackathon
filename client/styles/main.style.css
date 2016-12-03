@@ -8,21 +8,26 @@ html, body {
 body {
     font-family: 'Lato', sans-serif;
     background-color: rgba(223, 223, 223, 0.76);
+
 }
 
 body header {
     background-color: #264A60;
     height: 90px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: black;
+    position: fixed;
+    z-index: -1;
 
 }
 
-body header h1 {
+h1 {
     margin: 0;
+    margin-bottom: 20px;
     font-weight: lighter;
 }
 
@@ -31,23 +36,57 @@ body main {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding-top: 50px;
 }
 
 body main form {
-    width: 300px;
+    width: 400px;
+    height: 300px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
     box-sizing: border-box;
-    /*padding: 40px;*/
     font-weight: lighter;
+    border-radius: 3px;
+    background-color: #ECECEC;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.55);
 }
 
-body main form input {
+body main form span {
+    display: flex;
+    flex-direction: column;
+}
+
+body main form span input {
     width: 200px;
     height: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
 
+}
+
+body main form span button {
+    width: 200px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #264A60;
+    color: white;
+    font-size: 16px;
+    font-weight: 300;
+    border: none;
+    border-radius: 3px;
+}
+
+@media only screen and (max-width: 720px) {
+    body {
+        background-color: #ECECEC;
+    }
+    body main form {
+        width: 100%;
+        box-shadow: none;
+
+        /*height: 80%;*/
+    }
 }
