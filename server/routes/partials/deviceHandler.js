@@ -23,7 +23,7 @@
             var iotf_params = iotf_configs.defaults();
             try {
                 var postObject = {
-                    url: ['https://bpvobx.internetofthings.ibmcloud.com/api/v0002/device/types/',
+                    url: ['https://70aie6.internetofthings.ibmcloud.com/api/v0002/device/types/',
                         iotf_params.type, '/devices'].join(''),
                     payload: {
                         "deviceId": req.body.deviceId,
