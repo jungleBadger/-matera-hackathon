@@ -13,8 +13,6 @@
         ejs = require("ejs"),
         passport = require("passport"),
         mqttClient = require("ibmiotf"),
-        iotf_configs = require('./server/configs/ibm_iotf.js')(),
-        iotf_connections = require('./server/helpers/iotf_connections')(mqttClient),
         cookieSession = require("cookie-session"),
         cookieParser = require("cookie-parser"),
         compress = require("compression"),
@@ -23,6 +21,8 @@
         bodyParser = require("body-parser"),
         io = require("socket.io")(server),
         request = require("request"),
+        iotf_configs = require('./server/configs/ibm_iotf.js')(),
+        iotf_connections = require('./server/helpers/iotf_connections')(mqttClient, io),
         crypto = require("crypto"),
         materaMP = require("./server/helpers/materaMeioPagamento.js")(crypto, request);
 
@@ -52,10 +52,10 @@
     app.engine("html", engines.ejs);
     app.set("view engine", "html");
 
-    require("./server/routes/index.js")(app, io, request, materaMP, iotf_connections, iotf_configs);
+    require("./server/helpers/passport")(passport);
+    require("./server/routes/index.js")(app, io, request, materaMP, iotf_connections, iotf_configs, passport);
 
     server.listen(appEnv.port, "0.0.0.0", function () {
         console.log("server starting on " + appEnv.url);
     });
 }());
-

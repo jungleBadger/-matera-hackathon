@@ -48,6 +48,24 @@
             .pipe(gulp.dest("client/dist/"));
     });
 
+    gulp.task("browserify-console", function () {
+        var production = gutil.env.type === "production";
+
+        return gulp.src(["client/scripts/console/main.console.js"], {read: false})
+
+        // Browserify, and add source maps if this isn"t a production build
+            .pipe(browserify({
+                debug: !production
+            }))
+
+            // Rename the destination file
+            .pipe(uglify())
+            .pipe(rename({suffix: ".min"}))
+
+            // Output to the build directory
+            .pipe(gulp.dest("client/dist/"));
+    });
+
     gulp.task("watch", function() {
         gulp.watch("client/scripts/*.scripts", ["browserify"]);
     });

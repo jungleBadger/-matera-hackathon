@@ -4,7 +4,15 @@
 (function() {
     'use strict';
 
-    module.exports = function (mqtt) {
+    module.exports = function (mqtt, io) {
+
+        io.on('connection', function (socket) {
+            console.log('socket connected');
+            socket.once('disconnect', function () {
+                console.log([io.engine.clientsCount, 'Clients connected after this exit'].join(' '));
+            });
+        });
+
         return {
             createConnection: function () {
                 return new Promise(function (resolve, reject) {
@@ -14,19 +22,20 @@
                         "auth-key": process.env.IOTF_KEY || JSON.parse(process.env.VCAP_SERVICES)["iotf-service"][0].credentials.apiKey,
                         "auth-token": process.env.IOTF_TOKEN || JSON.parse(process.env.VCAP_SERVICES)["iotf-service"][0].credentials.apiToken
                     };
-                    console.log(appClientConfig);
                     var mqttApp = new mqtt.IotfApplication(appClientConfig);
                     mqttApp.connect();
 
                     mqttApp.on('connect', function () {
                         mqttApp.subscribeToDeviceEvents();
-                        mqttApp.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
-                            console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
-                        });
 
                         console.log("connected");
 
                         resolve(mqttApp);
+                    });
+
+                    mqttApp.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
+                        io.emit("payloadReceived", JSON.parse(payload));
+                        console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
                     });
 
                     mqttApp.on('error', function (error) {
