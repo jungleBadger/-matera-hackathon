@@ -49,7 +49,6 @@
                         },
                         json: postObject.payload || {}
                     }, function (err, response, body) {
-                        console.log(body.violations);
                         if (err) {
                             deferred.reject(err);
                         } else {
