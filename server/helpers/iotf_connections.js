@@ -4,7 +4,15 @@
 (function() {
     'use strict';
 
-    module.exports = function (mqtt) {
+    module.exports = function (mqtt, io) {
+
+        io.on('connection', function (socket) {
+            console.log('socket connected');
+            socket.once('disconnect', function () {
+                console.log([io.engine.clientsCount, 'Clients connected after this exit'].join(' '));
+            });
+        });
+
         return {
             createConnection: function () {
                 return new Promise(function (resolve, reject) {
@@ -21,6 +29,7 @@
                     mqttApp.on('connect', function () {
                         mqttApp.subscribeToDeviceEvents();
                         mqttApp.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
+                            io.emit("payloadReceived", JSON.parse(payload));
                             console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
                         });
 
@@ -35,14 +44,13 @@
                 });
             },
             checkConnection: function (mqttInstance) {
-
                 return new Promise(function (resolve, reject) {
                     if (!mqttInstance) {
                         reject('Create new MQTT');
                         return;
                     }
 
-                    if (mqttInstance.connected) {
+                    if (mqttInstance.isConnected) {
                         resolve(true);
                     } else {
                         reject(false);

@@ -12,6 +12,7 @@
     }
 
     module.exports = function (app, iotf_configs, iotf_connections, request) {
+        console.log(iotf_configs.defaults())
 
         app.post('/createDevice', function (req, res) {
 
@@ -22,11 +23,11 @@
             var iotf_params = iotf_configs.defaults();
             try {
                 var postObject = {
-                    url: ['https://e8wjfx.internetofthings.ibmcloud.com/api/v0002/device/types/',
+                    url: ['https://bpvobx.internetofthings.ibmcloud.com/api/v0002/device/types/',
                         iotf_params.type, '/devices'].join(''),
                     payload: {
                         "deviceId": req.body.deviceId,
-                        "authToken": [req.body.deviceId, 'HOW'].join(''),
+                        "authToken": [req.body.deviceId || "RASPBERRY", 'HOW'].join(''),
                         "deviceInfo": {
                             "serialNumber": req.body.serialNo || "123",
                             "manufacturer": req.body.manufacturer || "Raspberry Pi Foundation",
@@ -48,7 +49,7 @@
                         },
                         json: postObject.payload || {}
                     }, function (err, response, body) {
-                        console.log(response);
+                        console.log(body.violations);
                         if (err) {
                             deferred.reject(err);
                         } else {
@@ -93,7 +94,7 @@
 
             new Promise(function (resolve, reject) {
                 request.get({
-                    url: 'https://e8wjfx.internetofthings.ibmcloud.com/api/v0002/device/types/raspberry/devices',
+                    url: 'https://bpvobx.internetofthings.ibmcloud.com/api/v0002/device/types/raspberry/devices',
                     headers: {
                         "Authorization": ['Basic', iotf_configs.exportedCredentials()].join(' ')
                     }
@@ -136,7 +137,7 @@
 
         app.get('/removeDevice/:deviceId', function (req, res) {
             var iotf_params = iotf_configs.defaults(),
-                url = ['https://e8wjfx.internetofthings.ibmcloud.com/api/v0002/device/types/',
+                url = ['https://bpvobx.internetofthings.ibmcloud.com/api/v0002/device/types/',
                     iotf_params.type, '/devices/', req.params.deviceId].join('');
 
             new Promise(function (resolve, reject) {

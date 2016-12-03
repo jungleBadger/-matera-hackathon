@@ -13,8 +13,6 @@
         ejs = require("ejs"),
         passport = require("passport"),
         mqttClient = require("ibmiotf"),
-        iotf_configs = require('./server/configs/ibm_iotf.js')(),
-        iotf_connections = require('./server/helpers/iotf_connections')(mqttClient),
         cookieSession = require("cookie-session"),
         cookieParser = require("cookie-parser"),
         compress = require("compression"),
@@ -23,8 +21,10 @@
         bodyParser = require("body-parser"),
         io = require("socket.io")(server),
         request = require("request"),
+        iotf_configs = require('./server/configs/ibm_iotf.js')(),
+        iotf_connections = require('./server/helpers/iotf_connections')(mqttClient, io),
         crypto = require("crypto"),
-        getApiKey = require("./server/helpers/getMateraApiKey.js")(crypto, request);
+        materaMP = require("./server/helpers/materaMeioPagamento.js")(crypto, request);
 
 
     // app.use(express["static"](path.join(__dirname, "./server/public/"), { maxAge: 16400000 }));
@@ -52,8 +52,12 @@
     app.engine("html", engines.ejs);
     app.set("view engine", "html");
 
+<<<<<<< HEAD
     require("./server/helpers/passport")(passport);
     require("./server/routes/index.js")(app, io, request, getApiKey, iotf_connections, iotf_configs, passport);
+=======
+    require("./server/routes/index.js")(app, io, request, materaMP, iotf_connections, iotf_configs);
+>>>>>>> b6b825e80e986286934527d6b959208f8ad8fb0c
 
     server.listen(appEnv.port, "0.0.0.0", function () {
         console.log("server starting on " + appEnv.url);

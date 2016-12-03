@@ -31,11 +31,14 @@
         app.get("/initBroker", function (req, res) {
 
             iotf_connections.checkConnection(Broker).then(function successCallback() {
-                return res.status(200).json("Broker inicializado");
+                return res.status(200).json("Broker já inicializado");
 
             }, function errorCallback() {
                 iotf_connections.createConnection().then(function(brokerApp) {
                     Broker = brokerApp;
+                    Broker.on("message", function(topic, payload) {
+                        console.log(topic, payload);
+                    });
                     return res.status(200).json("Broker inicializado");
                 }, function (err) {
                     console.log(err);
@@ -61,12 +64,6 @@
 
             Broker.subscribe(topic, {
                 "qos": 2
-            });
-
-            Broker.on("message", function(topic, payload) {
-                console.log(topic);
-                console.log(JSON.parse(payload));
-                io.emit("payloadReceived", "teste");
             });
 
             return res.status(200).send([topic, "subscribed"].join(" "));
