@@ -52,12 +52,8 @@
     app.engine("html", engines.ejs);
     app.set("view engine", "html");
 
-<<<<<<< HEAD
     require("./server/helpers/passport")(passport);
-    require("./server/routes/index.js")(app, io, request, getApiKey, iotf_connections, iotf_configs, passport);
-=======
     require("./server/routes/index.js")(app, io, request, materaMP, iotf_connections, iotf_configs);
->>>>>>> b6b825e80e986286934527d6b959208f8ad8fb0c
 
     server.listen(appEnv.port, "0.0.0.0", function () {
         console.log("server starting on " + appEnv.url);
