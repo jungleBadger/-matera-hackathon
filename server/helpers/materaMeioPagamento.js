@@ -108,20 +108,23 @@
                     });
                 });
             },
-            "postCreateAccount": function (body) {
+            "postCreateAccount": function (data) {
                 var self = this;
-                var valoresHash = [Math.random(), body.client.taxId];
+                var valoresHash = [data.body.externalIdentifier, data.body.client.taxIdentifier.taxId];
 
                 return new Promise(function (resolve, reject) {
+                    var jsonbody = JSON.stringify(data.body);
                     var req = {
                         "url": url + apiAccount,
                         "method": "POST",
                         "headers": {
                             "Api-Access-Key": apiAccessKey,
-                            "Transaction-Hash": self.generateHash(valoresHash)
-                        }
+                            "Transaction-Hash": self.generateHash(valoresHash),
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        },
+                        "body": jsonbody
                     };
-                    req.body = body;
 
                     request(req, function (error, response, body) {
                         if (!error) {
