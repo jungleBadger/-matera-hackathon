@@ -71,6 +71,7 @@
             });
 
             Broker.on("message", function(topic, payload) {
+                console.log("AQUI")
                 console.log(topic);
                 console.log(JSON.parse(payload));
                 io.emit("payloadReceived", payload);
