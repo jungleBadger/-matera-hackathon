@@ -7,7 +7,7 @@
 
     module.exports = function (app) {
         app.get("/login", function (req, res) {
-            return res.status(200).send("oie login");
+            return res.status(200).render("./login.view.html");
         });
     };
 
