@@ -33,7 +33,7 @@
     gulp.task("browserify", function () {
         var production = gutil.env.type === "production";
 
-        return gulp.src(["client/js/controller/mobile-interface.script.js"], {read: false})
+        return gulp.src(["client/scripts/main.script.js"], {read: false})
 
         // Browserify, and add source maps if this isn"t a production build
             .pipe(browserify({
@@ -49,15 +49,15 @@
     });
 
     gulp.task("watch", function() {
-        gulp.watch("client/scripts/*.js", ["browserify"]);
+        gulp.watch("client/scripts/*.scripts", ["browserify"]);
     });
 
     gulp.task("minifyJS", function () {
-        return gulp.src(["client/*/*.js"])
-            .pipe(changed("client/dist/js/"))
+        return gulp.src(["client/*/*.scripts"])
+            .pipe(changed("client/dist/scripts/"))
             .pipe(uglify())
             .pipe(rename({suffix: ".min"}))
-            .pipe(gulp.dest("client/dist/js/"));
+            .pipe(gulp.dest("client/dist/scripts/"));
     });
 
     gulp.task("minifyCSS", function () {
