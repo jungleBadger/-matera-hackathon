@@ -18,6 +18,22 @@
     });
 
     socket.on("payloadReceived", function (location) {
+
+        var x = JSON.parse(location);
+
+
+        var uluru = { lat: x.latitude, lng: x.longitude };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+
+
+
         console.log(JSON.parse(location));
     });
 
