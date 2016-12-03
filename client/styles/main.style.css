@@ -78,3 +78,15 @@ body main form span button {
     border: none;
     border-radius: 3px;
 }
+
+@media only screen and (max-width: 720px) {
+    body {
+        background-color: #ECECEC;
+    }
+    body main form {
+        width: 100%;
+        box-shadow: none;
+
+        /*height: 80%;*/
+    }
+}
