@@ -8,13 +8,6 @@
 
     module.exports = function (app, iotf_connections, io) {
 
-        io.on('connection', function (socket) {
-            console.log('socket connected');
-            socket.once('disconnect', function () {
-                console.log([io.engine.clientsCount, 'Clients connected after this exit'].join(' '));
-            });
-        });
-
         app.get("/getBrokerStatus", function (req, res) {
             console.log(Broker);
             if (Broker) {
@@ -43,6 +36,9 @@
             }, function errorCallback() {
                 iotf_connections.createConnection().then(function(brokerApp) {
                     Broker = brokerApp;
+                    Broker.on("message", function(topic, payload) {
+                        console.log(topic, payload);
+                    });
                     return res.status(200).json("Broker inicializado");
                 }, function (err) {
                     console.log(err);
@@ -68,13 +64,6 @@
 
             Broker.subscribe(topic, {
                 "qos": 2
-            });
-
-            Broker.on("message", function(topic, payload) {
-                console.log("AQUI")
-                console.log(topic);
-                io.emit("payloadReceived", payload);
-                console.log("ASDUASUDSUDAS");
             });
 
             return res.status(200).send([topic, "subscribed"].join(" "));
