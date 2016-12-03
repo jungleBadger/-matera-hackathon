@@ -29,7 +29,7 @@
                     mqttApp.on('connect', function () {
                         mqttApp.subscribeToDeviceEvents();
                         mqttApp.on("deviceEvent", function (deviceType, deviceId, eventType, format, payload) {
-                            io.emit("payloadReceived", payload);
+                            io.emit("payloadReceived", JSON.parse(payload));
                             console.log("Device Event from :: "+deviceType+" : "+deviceId+" of event "+eventType+" with payload : "+payload);
                         });
 
