@@ -6,8 +6,8 @@
         deviceRoutes = require('./partials/deviceHandler'),
         brokerRoutes = require('./partials/brokerHandler');
 
-    module.exports = function (app, io, request, getApiKey, iotf_connections, iotf_configs) {
-        loginRoutes(app);
+    module.exports = function (app, io, request, getApiKey, iotf_connections, iotf_configs, passport) {
+        loginRoutes(app, passport);
         accountRoutes(app, getApiKey, request);
         deviceRoutes(app, iotf_configs, iotf_connections, request);
         brokerRoutes(app, iotf_connections, io);

@@ -52,10 +52,10 @@
     app.engine("html", engines.ejs);
     app.set("view engine", "html");
 
-    require("./server/routes/index.js")(app, io, request, getApiKey, iotf_connections, iotf_configs);
+    require("./server/helpers/passport")(passport);
+    require("./server/routes/index.js")(app, io, request, getApiKey, iotf_connections, iotf_configs, passport);
 
     server.listen(appEnv.port, "0.0.0.0", function () {
         console.log("server starting on " + appEnv.url);
     });
 }());
-
