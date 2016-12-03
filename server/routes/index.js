@@ -4,9 +4,9 @@
     var loginRoutes = require('./partials/loginHandler'),
         accountRoutes = require('./partials/accountHandler');
 
-    module.exports = function (app, io, crypto, request, getApiKey) {
+    module.exports = function (app, io, request, getApiKey) {
         loginRoutes(app);
-        accountRoutes(app, getApiKey, crypto, request);
+        accountRoutes(app, getApiKey, request);
     };
 
 }());
