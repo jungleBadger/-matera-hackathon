@@ -7,7 +7,6 @@
     module.exports = function ($) {
         return {
             "insertDriver": function (driverObj) {
-
                 return new Promise(function (resolve, reject) {
                     $.ajax({
                         url: '/insertDriver',
