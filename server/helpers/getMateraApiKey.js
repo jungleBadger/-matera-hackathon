@@ -25,7 +25,7 @@
                             "Api-Access-Key": apiAccessKey,
                             "Transaction-Hash": self.generateHash(accountId)
                         }
-                    }, function(error, response, body) {
+                    }, function (error, response, body) {
                         if (!error) {
                             resolve(response);
                         } else {
