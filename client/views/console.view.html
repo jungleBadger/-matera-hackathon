@@ -14,22 +14,31 @@
             <h1>Console</h1>
             <ul>
                 <li>
-                    Dashboard
+                    <a href="#" data-tab="1" class="tab active">Dashboard</a>
                 </li>
                 <li>
-                    Link 2
+                    <a href="#" data-tab="2" class="tab">Cadastro Motoristas</a>
                 </li>
                 <li>
-                    Link 3
+                    Cadastro Postos
                 </li>
             </ul>
 
         </aside>
 
-        <main>
-            <header>
-                <h2>Dashboard</h2>
-            </header>
+        <main id="tst">
+            <div data-content="1" class="contentx active">
+                <header>
+                    <h2>Dashboard</h2>
+                </header>
+            </div>
+
+            <div data-content="2" class="contentx">
+                <header>
+                    <h2>Cadastro</h2>
+                </header>
+            </div>
+
         </main>
 
         <script async src="../dist/main.console.min.js"></script>

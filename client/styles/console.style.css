@@ -80,3 +80,14 @@ h2 {
     padding: 10px;
     font-weight: lighter;
 }
+
+.contentx {
+    display: none;
+    flex: 1;
+    transition: all 1s linear;
+}
+
+.active {
+    display: block !important;
+}
+

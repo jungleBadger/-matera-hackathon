@@ -15,6 +15,7 @@
         mqttClient = require("ibmiotf"),
         cookieSession = require("cookie-session"),
         cookieParser = require("cookie-parser"),
+        Cloudant = require('./server/configs/cloudant').init,
         compress = require("compression"),
         morgan = require("morgan"),
         server = require("http").createServer(app),
@@ -52,8 +53,8 @@
     app.engine("html", engines.ejs);
     app.set("view engine", "html");
 
-    require("./server/helpers/passport")(passport);
-    require("./server/routes/index.js")(app, io, request, materaMP, iotf_connections, iotf_configs, passport);
+    require("./server/helpers/passport")(passport, Cloudant);
+    require("./server/routes/index.js")(app, io, request, materaMP, iotf_connections, iotf_configs, passport, Cloudant);
 
     server.listen(appEnv.port, "0.0.0.0", function () {
         console.log("server starting on " + appEnv.url);

@@ -5,7 +5,7 @@
     var apiAccessKey = process.env.API_ACCESS_KEY;
     var url = "http://public-api-elb-1090807689.us-west-2.elb.amazonaws.com";
     var apiAccount = "/v1/accounts/";
-    var apiPayment = "v2//payments/";
+    var apiPayment = "v1/payments/";
 
     module.exports = function (crypto, request) {
         return {
@@ -79,11 +79,12 @@
             "postPayment": function (body) {
                 var self = this;
                 return new Promise(function (resolve, reject) {
-                    var accountId = body.myAccount.accountId ? body.myAccount.accountId
-                        : body.paymentInfo.creditCard.holderTaxId;
-                    var cardId = body.paymentInfo.creditCard.cardNumber;
-                    var totalAmount = 0;
-                    var recipientsAccountIdAmount = "";
+
+                    var accountId = body.myAccount.accountId || body.paymentInfo.creditCard.holderTaxId,
+                        cardId = body.paymentInfo.creditCard.cardNumber,
+                        totalAmount = 0,
+                        recipientsAccountIdAmount = "";
+
                     body.recipients.forEach(function (recipient) {
                         totalAmount = totalAmount + recipient.amount;
                         recipientsAccountIdAmount = recipientsAccountIdAmount + recipient.account.accountId +
@@ -132,5 +133,5 @@
                 });
             }
         };
-    }
-} ());
+    };
+}());

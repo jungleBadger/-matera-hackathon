@@ -24,7 +24,7 @@
         "role": "driver"
     }];
 
-    module.exports = function (passport) {
+    module.exports = function (passport, Cloudant) {
         passport.serializeUser(function (user, done) {
             done(null, user);
         });

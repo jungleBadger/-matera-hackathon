@@ -4,7 +4,8 @@
 (function () {
     "use strict";
 
-    var socket = require('../../../server/public/libs/socket.io-client/socket.io')();
+    var socket = require('../../../server/public/libs/socket.io-client/socket.io')(),
+        $ = require("jquery");
 
 
     socket.on("connect", function() {
@@ -15,8 +16,15 @@
     });
 
     socket.on("payloadReceived", function (location) {
-        console.log(location);
+        console.log(JSON.parse(location));
     });
+
+    $('[data-tab]').on('click', function (e) {
+        e.preventDefault();
+        $(this).addClass('active').siblings('.tab').removeClass('active');
+        $('#tst [' + ['data-content=', $(this).data('tab'), ']'].join('')).addClass('active').siblings('[data-content]').removeClass('active');
+    });
+
 
 
 }());
