@@ -19,7 +19,8 @@
         bodyParser = require("body-parser"),
         io = require("socket.io")(server),
         request = require("request"),
-        crypto = require("crypto");
+        crypto = require("crypto"),
+        getApiKey = require("./server/helpers/getMateraApiKey.js");
 
     // app.use(express["static"](path.join(__dirname, "./server/public/"), { maxAge: 16400000 }));
     app.use(express["static"](path.join(__dirname, "./server/public/")));
@@ -41,9 +42,7 @@
     app.engine("html", engines.ejs);
     app.set("view engine", "html");
 
-
-    require("./server/routes/index.js")(app, io);
-
+    require("./server/routes/index.js")(app, io, crypto, request, getApiKey);
 
     server.listen(appEnv.port, "0.0.0.0", function () {
         console.log("server starting on " + appEnv.url);

@@ -40,4 +40,10 @@ jspm_packages
 
 .idea/
 
+<<<<<<< HEAD
 .env
+=======
+.env
+
+.vscode
+>>>>>>> 73c5f91795aafc18b1bafef44f901498bb31ed37
