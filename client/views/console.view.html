@@ -51,9 +51,7 @@
                                     Alert 1
                                 </div>
                             </div>
-                            <div class="col-10 driverMap">
-                                bla
-                            </div>
+                            <div class="col-10 driverMap" id="map"></div>
                         </div>
                     </div>
                     <div class="col-2" id="userList">
@@ -66,9 +64,7 @@
                                 <label for="">Name</label>
                                 <label for="">Something</label>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
 
@@ -121,7 +117,9 @@
             </div>
 
         </main>
-
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxeqlspQ8o6zTVZ0dLccGQ1m2qV17pv-Q&callback=initMap">
+        </script>
         <script async src="../dist/main.console.min.js"></script>
     </body>
 </html>

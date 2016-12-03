@@ -29,17 +29,21 @@
         });
 
         app.get("/initBroker", function (req, res) {
+            console.log("AQUI");
 
             iotf_connections.checkConnection(Broker).then(function successCallback() {
-                return res.status(200).json("Broker já inicializado");
+                console.log("AQUI");
+                return res.status(200).send("Broker já inicializado");
 
-            }, function errorCallback() {
+            }, function errorCallback(err) {
+                console.log(err);
                 iotf_connections.createConnection().then(function(brokerApp) {
+                    console.log("creating");
                     Broker = brokerApp;
                     Broker.on("message", function(topic, payload) {
                         console.log(topic, payload);
                     });
-                    return res.status(200).json("Broker inicializado");
+                    return res.status(200).send("Broker inicializado");
                 }, function (err) {
                     console.log(err);
                     return res.status(500).send("Conexão falhou");
