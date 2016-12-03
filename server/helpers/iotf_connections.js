@@ -35,14 +35,13 @@
                 });
             },
             checkConnection: function (mqttInstance) {
-
                 return new Promise(function (resolve, reject) {
                     if (!mqttInstance) {
                         reject('Create new MQTT');
                         return;
                     }
 
-                    if (mqttInstance.connected) {
+                    if (mqttInstance.isConnected) {
                         resolve(true);
                     } else {
                         reject(false);

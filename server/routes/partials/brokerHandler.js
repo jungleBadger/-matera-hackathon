@@ -31,7 +31,7 @@
         app.get("/initBroker", function (req, res) {
 
             iotf_connections.checkConnection(Broker).then(function successCallback() {
-                return res.status(200).json("Broker inicializado");
+                return res.status(200).json("Broker já inicializado");
 
             }, function errorCallback() {
                 iotf_connections.createConnection().then(function(brokerApp) {
