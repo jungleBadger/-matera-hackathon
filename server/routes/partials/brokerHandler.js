@@ -73,8 +73,8 @@
             Broker.on("message", function(topic, payload) {
                 console.log("AQUI")
                 console.log(topic);
-                console.log(JSON.parse(payload));
                 io.emit("payloadReceived", payload);
+                console.log("ASDUASUDSUDAS");
             });
 
             return res.status(200).send([topic, "subscribed"].join(" "));
