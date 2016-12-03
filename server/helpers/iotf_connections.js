@@ -17,8 +17,8 @@
             createConnection: function () {
                 return new Promise(function (resolve, reject) {
                     var appClientConfig = {
-                        "org": "bpvobx",
-                        "id": "hpcxylqxb8x",
+                        "org": "70aie6",
+                        "id": "a2g6k39sl6r5",
                         "auth-method" : "token",
                         "auth-key": process.env.IOTF_KEY || JSON.parse(process.env.VCAP_SERVICES)["iotf-service"][0].credentials.apiKey,
                         "auth-token": process.env.IOTF_TOKEN || JSON.parse(process.env.VCAP_SERVICES)["iotf-service"][0].credentials.apiToken
