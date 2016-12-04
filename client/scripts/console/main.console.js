@@ -16,8 +16,8 @@
         "driversListEl": document.getElementById("drivers"),
         "trucksListEl": document.getElementById("trucks"),
         "driverBalanceEl": document.getElementById("driverBalance"),
-        "driverNameEl": document.getElementById("driverName")
-
+        "driverNameEl": document.getElementById("driverName"),
+        "insertTripForm": document.getElementById("sendTripForm")
     };
 
     var handlers = {
@@ -36,6 +36,12 @@
             });
 
             return userEl;
+        },
+        "addTripAction": function () {
+            properties.insertTripForm.addEventListener("submit", function (el) {
+                el.preventDefault();
+                console.log($("#sendTripForm").serialize());
+            });
         }
     };
 
@@ -92,6 +98,7 @@
         },
         "init": function () {
             var self = this;
+            handlers.addTripAction();
             factory.getAllDrivers().then(function (drivers) {
                 properties.driversListEl.appendChild(methods.createDatalistOption(drivers));
                 drivers.forEach(function (driver) {
@@ -121,6 +128,7 @@
     socket.on("payloadReceived", function (location) {
 
         var x = JSON.parse(location);
+        console.log(x);
 
 
         var uluru = { lat: x.latitude, lng: x.longitude };
@@ -147,16 +155,13 @@
     });
 
 
-
-    $(document).ready(function () {
-        $('[data-tab]').on('click', function (e) {
-            e.preventDefault();
-            $(this).addClass('active').siblings('.tab').removeClass('active');
-            $('#tst [' + ['data-content=', $(this).data('tab'), ']'].join('')).addClass('active').siblings('[data-content]').removeClass('active');
-        });
-
-        methods.init();
+    $('[data-tab]').on('click', function (e) {
+        e.preventDefault();
+        $(this).addClass('active').siblings('.tab').removeClass('active');
+        $('#tst [' + ['data-content=', $(this).data('tab'), ']'].join('')).addClass('active').siblings('[data-content]').removeClass('active');
     });
+
+    methods.init();
 
 
 
