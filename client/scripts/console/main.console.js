@@ -6,7 +6,9 @@
 
     var socket = require('../../../server/public/libs/socket.io-client/socket.io')(),
         $ = require("jquery"),
-        factory = require("./console.factory")($);
+        factory = require("./console.factory")($),
+        ladda = require("ladda"),
+        toastr = require("toastr");
 
     //
 
