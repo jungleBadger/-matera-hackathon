@@ -45,6 +45,18 @@
                     });
                 });
             },
+            "getAllTrips": function () {
+                return new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: '/getAllTrips',
+                        method: 'get'
+                    }).done(function(param){
+                        resolve(param);
+                    }).fail(function (err) {
+                        reject(err);
+                    });
+                });
+            },
             "getUserBalance": function (accountId) {
                 return new Promise(function (resolve, reject) {
                     $.ajax({
@@ -75,6 +87,18 @@
                         url: '/insertTrip',
                         method: 'post',
                         data: tripObj
+                    }).done(function(param){
+                        resolve(param);
+                    }).fail(function (err) {
+                        reject(err);
+                    });
+                });
+            },
+            "finishTrip": function (accountId) {
+                return new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: ['/finishTrip/', accountId].join(""),
+                        method: 'get'
                     }).done(function(param){
                         resolve(param);
                     }).fail(function (err) {

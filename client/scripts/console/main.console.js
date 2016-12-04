@@ -20,7 +20,8 @@
         "driverBalanceEl": document.getElementById("driverBalance"),
         "driverNameEl": document.getElementById("driverName"),
         "insertTripForm": document.getElementById("sendTripForm"),
-        "driverAlertsListEl": document.querySelector(".driverAlerts")
+        "driverAlertsListEl": document.querySelector(".driverAlerts"),
+        "driverHeaderWrapper": document.querySelector(".driverHeader")
     };
 
     console.log(properties);
@@ -28,6 +29,7 @@
         "addUserListAction": function (userEl, userInfo) {
             methods.changeBalanceInfo().changeDriverNameInfo();
             userEl.addEventListener("click", function () {
+                $(properties.driverHeaderWrapper).slideToggle();
                 methods.removeDOMElement(properties.driverAlertsListEl);
                 factory.getTripsByDriver(userInfo.accountId).then(function (tripsArr) {
                     tripsArr.forEach(function (trip) {
@@ -63,22 +65,30 @@
         "addTripListAction": function (tripEl, tripObj) {
             tripEl.addEventListener("click", function () {
                 console.log(tripObj);
-                methods.loadMap(JSON.parse(tripObj.vehicleTrail[0].location).latitude, JSON.parse(tripObj.vehicleTrail[0].location).longitude)
+                methods.loadMap(JSON.parse(tripObj.vehicleTrail[0].location).latitude, JSON.parse(tripObj.vehicleTrail[0].location).longitude, tripObj.vehicleTrail);
             });
         }
     };
-    // <div cl/*ass="col-12 alertList">
-    //     <!-- <button type="button" name="button">Alert 1</button> -->
-    // Alert 1
-    // </div>*/
+
+
     var methods = {
-        "loadMap": function (lat, long) {
+        "loadMap": function (lat, long, arr) {
 
             var uluru = { lat: lat, lng: long };
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 4,
+                zoom: 12,
                 center: uluru
             });
+
+            console.log(arr);
+
+            for (var i = 0; i < arr.length; i += 1) {
+                var marker = new google.maps.Marker({
+                    position: {"lat": JSON.parse(arr[i].location).latitude + i, "lng": JSON.parse(arr[i].location).longitude + i},
+                    map: map,
+                    title: 'Hello World!'
+                });
+            }
 
         },
         "removeDOMElement": function (el) {
@@ -91,7 +101,27 @@
             var div = document.createElement("div");
             div.classList.add("col-12");
             div.classList.add("alertList");
+
+            if (trip.status === "active") {
+                div.classList.add("active-trip")
+            } else if (trip.status === "finished") {
+                div.classList.add("finished-trip")
+            } else {
+                div.classList.add("canceled-trip")
+            }
+
+            var incomingSpan = document.createElement("span");
+            var destSpan = document.createElement("span");
+
+            incomingSpan.appendChild(document.createTextNode(trip.origem));
+            destSpan.appendChild(document.createTextNode(trip.destino));
+
             div.appendChild(document.createTextNode(trip.truck));
+            var innerDiv = document.createElement("div");
+            innerDiv.appendChild(incomingSpan);
+            innerDiv.appendChild(destSpan);
+
+            div.appendChild(innerDiv);
             handlers.addTripListAction(div, trip);
             return div;
         },
@@ -129,14 +159,18 @@
             imgEl.attributes.alt = "img";
 
             imgEl.src = "http://placehold.it/50x50";
+            imgEl.classList.add("driver-pic");
 
             innerDiv.appendChild(imgEl);
 
             infoDiv.classList.add("driverInfo");
             infoDiv.classList.add("col-8");
+            console.log(driverInfo);
 
-            nameLabel.appendChild(document.createTextNode("Name"));
-            infoLabel.appendChild(document.createTextNode("Something"));
+            nameLabel.appendChild(document.createTextNode(driverInfo.username));
+            nameLabel.classList.add("name-disclaimer");
+            infoLabel.appendChild(document.createTextNode(driverInfo.accountId));
+            infoLabel.classList.add("account-disclaimer");
             infoDiv.appendChild(nameLabel);
             infoDiv.appendChild(infoLabel);
 
@@ -150,6 +184,14 @@
         "init": function () {
             var self = this;
             handlers.addTripAction();
+
+            factory.getAllTrips().then(function (tripsArr) {
+                console.log(tripsArr);
+                tripsArr.forEach(function (trip) {
+                    properties.driverAlertsListEl.appendChild(methods.buildTripList(trip));
+                });
+            });
+
             factory.getAllDrivers().then(function (drivers) {
                 properties.driversListEl.appendChild(methods.createDatalistOption(drivers));
                 drivers.forEach(function (driver) {

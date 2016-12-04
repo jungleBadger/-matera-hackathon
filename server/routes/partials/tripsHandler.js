@@ -11,7 +11,7 @@
         app.get("/getAllTrips", function (req, res) {
             tripsDB.find({
                 "selector": {
-                    "_id": {
+                    "status": {
                         "$gt": null
                     }
                 }
@@ -57,7 +57,7 @@
                                 return res.status(500).send('Ocorreu um erro inesperado');
                             }
 
-                            return res.status(201).send('Caminhão inserido');
+                            return res.status(200).send('Viagem encerrada');
 
                         });
                     } else {
@@ -70,7 +70,6 @@
 
         app.post('/insertTrip', function (req, res) {
             req.body.status = "active";
-            //chamar a api com os parametros req.body.destino e inicio, atualizar o objeto req.body.partida = {lat: long:}
             process.nextTick(function () {
                 tripsDB.insert(req.body, function (err) {
                     if (err) {
