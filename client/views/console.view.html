@@ -39,11 +39,11 @@
                     <div class="col-12 driverHeader">
                         <div>
                             <div class="col-3 driverText">
-                                <h3 id="driverName"></h3>
+                                <h3 id="driverName">Nome: </h3>
                             </div>
                             <div class="col-4 driverText">
                                 <div class="driverText">
-                                    <h2 id="driverBalance"></h2>
+                                    <h2 id="driverBalance">Saldo: </h2>
                                 </div>
                             </div>
                         </div>
@@ -51,14 +51,14 @@
                     </div>
                     <div class="col-2 driverFeed">
                         <div class="col-12 driverAlerts">
-                            <div class="drivers">
+                            <div class="drivers disclaimer">
                                 <h3>Viagens</h3>
                             </div>
                         </div>
                     </div>
                     <div class="col-7 driverMap" id="map"></div>
                     <div class="col-3" id="userList">
-                        <div class="drivers">
+                        <div class="drivers disclaimer">
                             <h3>Motoristas</h3>
                         </div>
                     </div>
@@ -144,7 +144,19 @@
 
         </main>
 
-
+        <aside id="popup">
+            <div>
+                Deseja encerrar a viagem e realizar o pagamento do recurso?
+            </div>
+            <div>
+                <button id="yes">
+                    Sim
+                </button>
+                <button id="no">
+                    Não
+                </button>
+            </div>
+        </aside>
         <script defer src="../dist/main.console.min.js"></script>
         <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxeqlspQ8o6zTVZ0dLccGQ1m2qV17pv-Q"></script>
 

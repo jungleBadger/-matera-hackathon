@@ -16,13 +16,13 @@
         loginRoutes(app, passport);
         accountRoutes(app, materaMP, request);
         balanceRoutes(app, materaMP, request);
-        paymentRoutes(app, materaMP, request)
+        paymentRoutes(app, materaMP, request);
         statementRoutes(app, materaMP, request);
         deviceRoutes(app, iotf_configs, iotf_connections, request);
         brokerRoutes(app, iotf_connections, io);
         truckRoutes(app, Cloudant);
         driverRoutes(app, Cloudant, materaMP, UserSchema);
-        tripsRoutes(app, Cloudant);
+        tripsRoutes(app, Cloudant, request);
     };
 
 }());

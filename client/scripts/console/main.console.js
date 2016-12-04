@@ -10,8 +10,7 @@
         ladda = require("ladda"),
         toastr = require("toastr");
 
-    //
-
+    var manipulatedAccount;
 
     var properties = {
         "userListEl": document.getElementById("userList"),
@@ -30,14 +29,15 @@
             methods.changeBalanceInfo().changeDriverNameInfo();
             userEl.addEventListener("click", function () {
                 $(properties.driverHeaderWrapper).slideToggle();
-                methods.removeDOMElement(properties.driverAlertsListEl);
-                factory.getTripsByDriver(userInfo.accountId).then(function (tripsArr) {
-                    tripsArr.forEach(function (trip) {
-                        properties.driverAlertsListEl.appendChild(methods.buildTripList(trip));
-                    });
-                }, function (err) {
-                    console.log(err);
-                });
+                // methods.removeDOMElement(properties.driverAlertsListEl);
+                // factory.getTripsByDriver(userInfo.accountId).then(function (tripsArr) {
+                //     tripsArr.forEach(function (trip) {
+                //         properties.driverAlertsListEl.appendChild(methods.buildTripList(trip));
+                //     });
+                // }, function (err) {
+                //     console.log(err);
+                // });
+                manipulatedAccount = userInfo.accountId;
                 factory.getUserBalance(userInfo.accountId).then(function (data) {
                     try {
                         methods.changeBalanceInfo(["R$ ", data.balances[1].amount.toLocaleString()].join("")).changeDriverNameInfo(userInfo.username);
@@ -65,30 +65,59 @@
         "addTripListAction": function (tripEl, tripObj) {
             tripEl.addEventListener("click", function () {
                 console.log(tripObj);
-                methods.loadMap(JSON.parse(tripObj.vehicleTrail[0].location).latitude, JSON.parse(tripObj.vehicleTrail[0].location).longitude, tripObj.vehicleTrail);
+                methods.loadMap(tripObj.origemLocation, tripObj.destinoLocation, tripObj.vehicleTrail || []);
             });
         }
     };
 
 
     var methods = {
-        "loadMap": function (lat, long, arr) {
+        "loadMap": function (loc1, loc2, arr) {
 
-            var uluru = { lat: lat, lng: long };
+            var uluru = { lat: loc1.lat, lng: loc1.lng };
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
+                zoom: 6,
                 center: uluru
             });
 
-            console.log(arr);
+            var contentString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                '</div>'+
+                '<h1 id="firstHeading" class="firstHeading">Aquecimento detectado</h1>'+
+                '<div id="bodyContent"><p>Superaquecimento detectado</p>' +
+                '</div>'+
+                '</div>';
+
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
 
             for (var i = 0; i < arr.length; i += 1) {
-                var marker = new google.maps.Marker({
-                    position: {"lat": JSON.parse(arr[i].location).latitude + i, "lng": JSON.parse(arr[i].location).longitude + i},
-                    map: map,
-                    title: 'Hello World!'
+                var location = JSON.parse(arr[i].location);
+                var marker2 = new google.maps.Marker({
+                    // position: {"lat": location.latitude - 1, "lng": location.longitude - 1},
+                    position: {"lat": -23.175671, "lng": -45.891064},
+                    map: map
+                });
+                marker2.addListener('click', function() {
+                    infowindow.open(map, marker2);
                 });
             }
+
+
+            var markerInit = new google.maps.Marker({
+                position: {"lat": loc1.lat, "lng": loc1.lng},
+                map: map,
+                title: 'Hello World!'
+            });
+
+            var markerEnd = new google.maps.Marker({
+                position: {"lat": loc2.lat, "lng": loc2.lng},
+                map: map,
+                title: 'Hello World!'
+            });
+
 
         },
         "removeDOMElement": function (el) {
@@ -103,23 +132,32 @@
             div.classList.add("alertList");
 
             if (trip.status === "active") {
-                div.classList.add("active-trip")
+                var btnImg = document.createElement("img");
+                btnImg.classList.add("img-holder");
+                btnImg.src = "/assets/close.svg";
+
+                btnImg.addEventListener("click", function () {
+                    $("#popup").slideDown();
+                });
+                div.classList.add("active-trip");
+                div.appendChild(btnImg);
             } else if (trip.status === "finished") {
-                div.classList.add("finished-trip")
+                div.classList.add("finished-trip");
             } else {
-                div.classList.add("canceled-trip")
+                div.classList.add("canceled-trip");
             }
 
             var incomingSpan = document.createElement("span");
             var destSpan = document.createElement("span");
 
-            incomingSpan.appendChild(document.createTextNode(trip.origem));
-            destSpan.appendChild(document.createTextNode(trip.destino));
+            incomingSpan.appendChild(document.createTextNode("De: " + trip.origem));
+            destSpan.appendChild(document.createTextNode("Para: " + trip.destino));
 
             div.appendChild(document.createTextNode(trip.truck));
             var innerDiv = document.createElement("div");
             innerDiv.appendChild(incomingSpan);
             innerDiv.appendChild(destSpan);
+
 
             div.appendChild(innerDiv);
             handlers.addTripListAction(div, trip);
@@ -255,6 +293,19 @@
     });
 
     methods.init();
+
+
+    $("#yes").click(function () {
+        factory.payAccount(manipulatedAccount).then(function (data) {
+            $("#popup").slideUp();
+        }, function (err) {
+            console.log(err);
+        });
+    });
+
+    $("#no").click(function () {
+        $("#popup").slideUp();
+    });
 
 
 

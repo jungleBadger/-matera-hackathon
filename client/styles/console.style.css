@@ -57,6 +57,7 @@ body main {
 
 body main header {
     height: 55px;
+    z-index: 1;
     border-radius: 2px;
     background-color: white;
     display: flex;
@@ -213,7 +214,9 @@ input#insertDriver {
 
 div#userList {
     height: 100%;
-    background-color: rgb(170, 170, 170);
+    background-color: rgba(170, 170, 170, .6);
+    box-shadow: 0px 1px 1px 0px;
+    z-index: 1;
 
 }
 
@@ -230,6 +233,7 @@ div#userList {
     display: flex;
     flex-direction: column;
     padding: 5px;
+    margin-left: 5px;
 }
 
 .driverHeader {
@@ -250,8 +254,19 @@ div#userList {
     height: 100%;
 }
 
+.disclaimer {
+    height: 40px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    cursor: pointer;
+    border: 1px solid gainsboro;
+    background-color: floralwhite !important;
+    box-shadow: 0 1px 4px -1px;
+    border-radius: 2px;
+}
+
 .driverFeed {
-    background-color: #ECF0F2;
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -270,11 +285,22 @@ div#userList {
 }
 
 .alertList {
-    height: 40px;
+    height: 65px;
     border: 1px solid lightgray;
     display: flex;
-    align-items: center;
     cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+div.col-12.alertList > div {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    padding: 5px 0;
 }
 
 .alertList button {
@@ -327,6 +353,7 @@ div#userList {
 }
 
 .active-trip {
+    position: relative;
     background-color: rgba(173, 255, 47, 0.40);
 }
 
@@ -336,10 +363,36 @@ div#userList {
 
 .driver-pic {
     border-radius: 50%;
+    border: 1px solid white;
+    box-shadow: 1px 1px 1px;
+}
+
+.img-holder {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 5px;
+    background-image: url("./close.svg");
 }
 
 @media only screen and (max-width: 640px) {
     aside {
         display: none !important;
     }
+}
+
+
+#popup {
+    display: none;
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    z-index: 10;
+    background: ghostwhite;
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    color: black;
+    margin: auto;
+    left: 0;
+    right: 0;
 }

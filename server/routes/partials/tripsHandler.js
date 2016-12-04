@@ -4,7 +4,7 @@
 (function () {
     "use strict";
 
-    module.exports = function (app, Cloudant) {
+    module.exports = function (app, Cloudant, request) {
         var tripsDB = Cloudant.use("trips");
 
 
@@ -69,16 +69,36 @@
 
 
         app.post('/insertTrip', function (req, res) {
-            req.body.status = "active";
-            process.nextTick(function () {
-                tripsDB.insert(req.body, function (err) {
-                    if (err) {
-                        return res.status(500).send('Ocorreu um erro inesperado');
-                    }
 
-                    return res.status(201).send('Caminhão inserido');
+            console.log(req.body);
+            request.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + req.body.origem + "&key=AIzaSyCsSHnld6kt-fxDgzwnlGXp8pY7I_EE0JI", function (err, body, response) {
+                console.log("aqui");
+                console.log(JSON.parse(response).results);
+                req.body.origemLocation = JSON.parse(response).results[0].geometry.location;
+                request.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + req.body.destino + "&key=AIzaSyCsSHnld6kt-fxDgzwnlGXp8pY7I_EE0JI", function (err, body, resp) {
+                    console.log("aqui");
+                    console.log(JSON.parse(resp).results);
+                    req.body.destinoLocation = JSON.parse(resp).results[0].geometry.location;
+                    req.body.status = "active";
+                    process.nextTick(function () {
+                        tripsDB.insert(req.body, function (err) {
+                            if (err) {
+                                return res.status(500).send('Ocorreu um erro inesperado');
+                            }
 
+                            return res.status(201).send('Caminhão inserido');
+
+                        });
+                    });
                 });
+
+            });
+
+        });
+
+        app.get("/getGeocoding/:area", function (req, res) {
+            request.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + req.params.area + "&key=AIzaSyCsSHnld6kt-fxDgzwnlGXp8pY7I_EE0JI", function (err, body, response) {
+                return res.status(200).send(JSON.parse(response).results[0].geometry.location);
             });
         });
     };

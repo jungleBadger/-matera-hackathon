@@ -105,6 +105,50 @@
                         reject(err);
                     });
                 });
+            },
+            "payAccount": function (accountId) {
+                console.log("AWQUEIQIEW");
+                console.log(accountId);
+                return new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: '/payment/',
+                        method: 'post',
+                        data: {
+                            "totalAmount": "100",
+                            "currency": "BRL",
+                            "externalIdentifier": "12345678",
+                            "sender":
+                            {
+                                "account":
+                                {
+                                    "accountId": "63A48F39-2FFE-9C43-A5B6-4EF5F8DAEA00"
+                                }
+                            },
+                            "paymentInfo":
+                            {
+                                "transactionType": "InternalTransfer"
+                            },
+                            "recipients":
+                                [
+                                    {
+                                        "account":
+                                        {
+                                            "accountId": accountId
+                                        },
+                                        "amount": "100",
+                                        "currency": "BRL",
+                                        "senderComment": "0123456789",
+                                        "recipientComment": "9876543210"
+                                    }
+                                ],
+                            "callbackAddress": "http://www.matera.com"
+                        }
+                    }).done(function(param){
+                        resolve(param);
+                    }).fail(function (err) {
+                        reject(err);
+                    });
+                });
             }
         }
     };
