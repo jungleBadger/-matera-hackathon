@@ -7,12 +7,14 @@
         statementRoutes = require('./partials/statementHandler'),
         deviceRoutes = require('./partials/deviceHandler'),
         brokerRoutes = require('./partials/brokerHandler'),
-        driverRoutes = require("./partials/driverHandler");
+        driverRoutes = require("./partials/driverHandler"),
+        paymentRoutes = require("./partials/paymentHandler");
 
     module.exports = function (app, io, request, materaMP, iotf_connections, iotf_configs, passport, Cloudant) {
         loginRoutes(app, passport);
         accountRoutes(app, materaMP, request);
         balanceRoutes(app, materaMP, request);
+        paymentRoutes(app, materaMP, request)
         statementRoutes(app, materaMP, request);
         deviceRoutes(app, iotf_configs, iotf_connections, request);
         brokerRoutes(app, iotf_connections, io);

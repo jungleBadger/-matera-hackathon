@@ -4,7 +4,7 @@
 (function () {
     "use strict";
     module.exports = function (app, materaMP, request) {
-        app.get("/payment", function (req, res) {
+        app.post("/payment", function (req, res) {
             materaMP.postPayment(req.body).then(function successCB(data) {
                 return res.status(200).send(data);
             }, function errorCB(error) {
