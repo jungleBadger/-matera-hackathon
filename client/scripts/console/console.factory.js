@@ -20,7 +20,42 @@
                         reject(err);
                     });
                 });
-
+            },
+            "getAllDrivers": function () {
+                return new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: '/getAllDrivers',
+                        method: 'get'
+                    }).done(function(param){
+                        resolve(param);
+                    }).fail(function (err) {
+                        reject(err);
+                    });
+                });
+            },
+            "getAllTrucks": function () {
+                return new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: '/getAllTrucks',
+                        method: 'get'
+                    }).done(function(param){
+                        resolve(param);
+                    }).fail(function (err) {
+                        reject(err);
+                    });
+                });
+            },
+            "getUserBalance": function (accountId) {
+                return new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: ['/getUserBalance/', accountId].join(""),
+                        method: 'get'
+                    }).done(function(param){
+                        resolve(param);
+                    }).fail(function (err) {
+                        reject(err);
+                    });
+                });
             }
         }
     };

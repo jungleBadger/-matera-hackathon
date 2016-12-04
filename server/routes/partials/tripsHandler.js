@@ -9,7 +9,7 @@
 
 
         app.get("/getAllTrips", function (req, res) {
-            truckDB.find({
+            tripsDB.find({
                 "selector": {
                     "_id": {
                         "$gt": null

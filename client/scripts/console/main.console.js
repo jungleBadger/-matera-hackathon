@@ -8,6 +8,107 @@
         $ = require("jquery"),
         factory = require("./console.factory")($);
 
+    //
+
+
+    var properties = {
+        "userListEl": document.getElementById("userList"),
+        "driversListEl": document.getElementById("drivers"),
+        "trucksListEl": document.getElementById("trucks"),
+        "driverBalanceEl": document.getElementById("driverBalance"),
+        "driverNameEl": document.getElementById("driverName")
+
+    };
+
+    var handlers = {
+        "addUserListAction": function (userEl, userInfo) {
+            methods.changeBalanceInfo().changeDriverNameInfo();
+            userEl.addEventListener("click", function () {
+                factory.getUserBalance(userInfo.accountId).then(function (data) {
+                    try {
+                        methods.changeBalanceInfo(["R$ ", data.balances[1].amount.toLocaleString()].join("")).changeDriverNameInfo(userInfo.username);
+                    } catch (e) {
+                        console.log(e);
+                    }
+                }, function (error) {
+                    console.log(error);
+                });
+            });
+
+            return userEl;
+        }
+    };
+
+    var methods = {
+        "changeDriverNameInfo": function (name) {
+            properties.driverNameEl.innerHTML = name || "";
+            return this;
+        },
+        "changeBalanceInfo": function (amount) {
+            properties.driverBalanceEl.innerHTML = amount || "";
+            return this;
+        },
+        "createDatalistOption": function (itemArray) {
+            var docFragment = document.createDocumentFragment();
+            itemArray.forEach(function (item) {
+                var option = document.createElement("option");
+                option.appendChild(document.createTextNode(item.username || item.placa));
+                docFragment.appendChild(option);
+            });
+            return docFragment
+        },
+        "buildDriverList": function (driverInfo) {
+            var docFragment = document.createDocumentFragment();
+
+            var outerDiv = document.createElement("div"),
+                innerDiv = document.createElement("div"),
+                imgEl = document.createElement("img"),
+                infoDiv = document.createElement("div"),
+                nameLabel = document.createElement("label"),
+                infoLabel = document.createElement("label");
+
+            innerDiv.classList.add("drivers");
+
+            imgEl.attributes.alt = "img";
+
+            imgEl.src = "http://placehold.it/50x50";
+
+            innerDiv.appendChild(imgEl);
+
+            infoDiv.classList.add("driverInfo");
+            infoDiv.classList.add("col-8");
+
+            nameLabel.appendChild(document.createTextNode("Name"));
+            infoLabel.appendChild(document.createTextNode("Something"));
+            infoDiv.appendChild(nameLabel);
+            infoDiv.appendChild(infoLabel);
+
+            innerDiv.appendChild(infoDiv);
+            outerDiv.appendChild(innerDiv);
+            handlers.addUserListAction(outerDiv, driverInfo);
+
+            docFragment.appendChild(outerDiv);
+            return docFragment;
+        },
+        "init": function () {
+            var self = this;
+            factory.getAllDrivers().then(function (drivers) {
+                properties.driversListEl.appendChild(methods.createDatalistOption(drivers));
+                drivers.forEach(function (driver) {
+                    properties.userListEl.appendChild(self.buildDriverList(driver));
+                });
+            }, function (error) {
+                properties.userListEl.appendChild(document.createTextNode("Erro ao recuperar motoristas"));
+                console.log(error);
+            });
+
+            factory.getAllTrucks().then(function (trucks) {
+                properties.trucksListEl.appendChild(methods.createDatalistOption(trucks));
+            }, function (error) {
+                console.log(error);
+            });
+        }
+    };
 
 
     socket.on("connect", function() {
@@ -32,8 +133,6 @@
             map: map
         });
 
-
-
         console.log(JSON.parse(location));
     });
 
@@ -47,10 +146,16 @@
         });
     });
 
-    $('[data-tab]').on('click', function (e) {
-        e.preventDefault();
-        $(this).addClass('active').siblings('.tab').removeClass('active');
-        $('#tst [' + ['data-content=', $(this).data('tab'), ']'].join('')).addClass('active').siblings('[data-content]').removeClass('active');
+
+
+    $(document).ready(function () {
+        $('[data-tab]').on('click', function (e) {
+            e.preventDefault();
+            $(this).addClass('active').siblings('.tab').removeClass('active');
+            $('#tst [' + ['data-content=', $(this).data('tab'), ']'].join('')).addClass('active').siblings('[data-content]').removeClass('active');
+        });
+
+        methods.init();
     });
 
 

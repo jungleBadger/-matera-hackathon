@@ -308,3 +308,8 @@ div#userList {
     height: 30px;
     border: none;
 }
+
+#userList > div > div.drivers:hover {
+    background-color: rgba(0, 0, 0, .5);
+    cursor: pointer;
+}

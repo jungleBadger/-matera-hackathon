@@ -13,9 +13,7 @@
         app.get("/getAllDrivers", function (req, res) {
             userDB.find({
                 "selector": {
-                    "username": {
-                        "$gt": null
-                    }
+                    "role": "driver"
                 }
             }, function (err, data) {
                 console.log(err, data);
@@ -24,6 +22,14 @@
                         return res.status(200).send(data.docs);
                     }
                 }
+            });
+        });
+
+        app.get("/getUserBalance/:accountId", function (req, res) {
+            materaMP.getAccountBalance(req.params.accountId).then(function (data) {
+                return res.status(200).send(data);
+            }, function (err) {
+                return res.status(500).send(err);
             });
         });
 
