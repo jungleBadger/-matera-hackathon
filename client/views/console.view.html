@@ -10,7 +10,7 @@
         <style>@import url('https://fonts.googleapis.com/css?family=Lato:300,400');</style>
     </head>
     <body>
-        <aside>
+        <aside class="col-2">
             <h1>Console</h1>
             <ul>
                 <li>
@@ -33,29 +33,33 @@
 
             <div data-content="1" class="contentx active">
                 <div class="row">
-                    <div class="col-10 column">
-                        <header class="col-12">
-                            <h2>Dashboard</h2>
-                        </header>
-                        <div class="col-12 driverHeader">
+                    <header class="col-12">
+                        <h2>Dashboard</h2>
+                    </header>
+                    <div class="col-12 driverHeader">
+                        <div>
                             <div class="col-3 driverText">
                                 <h3 id="driverName"></h3>
                             </div>
-                            <div class="col-3 driverText">
-                                <div class="col-3 driverText">
+                            <div class="col-4 driverText">
+                                <div class="driverText">
                                     <h2 id="driverBalance"></h2>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 driverFeed">
-                            <div class="col-2 driverAlerts">
+
+                    </div>
+                    <div class="col-2 driverFeed">
+                        <div class="col-12 driverAlerts">
+                            <div class="drivers">
+                                <h3>Viagens</h3>
                             </div>
-                            <div class="col-10 driverMap" id="map"></div>
                         </div>
                     </div>
-                    <div class="col-2" id="userList">
+                    <div class="col-7 driverMap" id="map"></div>
+                    <div class="col-3" id="userList">
                         <div class="drivers">
-                            <h3>Lista de Motoristas</h3>
+                            <h3>Motoristas</h3>
                         </div>
                     </div>
                 </div>

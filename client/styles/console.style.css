@@ -12,16 +12,14 @@ body {
 }
 
 body aside {
-    width: 200px;
-    height: 100%;
+    height: calc(100% + 55px);
     background-color: #464646;
     color: snow;
     font-weight: lighter;
     display: flex;
     flex-direction: column;
+    padding: 10px;
     justify-content: flex-start;
-    align-items: center;
-    box-sizing: border-box;
 }
 
 body aside ul {
@@ -60,7 +58,7 @@ body main {
 body main header {
     height: 55px;
     border-radius: 2px;
-    background-color: #ECF0F2;
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -222,25 +220,33 @@ div#userList {
 .drivers {
     display: flex;
     flex-direction: row;
+    margin: 20px 0;
+    padding: 10px 20px;
+    cursor: pointer;
 
 }
 
 .driverInfo {
     display: flex;
     flex-direction: column;
+    padding: 5px;
 }
 
 .driverHeader {
-    background-color: #ECF0F2;
-    height: 140px;
+    height: 120px;
+    display: none;
+}
+
+.driverHeader > div {
+    background-color: yellowgreen;
     display: flex;
+    height: inherit;
     flex-direction: row;
     justify-content: space-between;
     border: 1px solid lightgray;
 }
 
 .driverText {
-    background-color: #ECF0F2;
     height: 100%;
 }
 
@@ -259,7 +265,7 @@ div#userList {
 }
 
 .driverMap {
-    background-color: pink;
+    background-color: rgba(0, 0, 0, .1);
     height: 100%;
 }
 
@@ -268,6 +274,7 @@ div#userList {
     border: 1px solid lightgray;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .alertList button {
@@ -311,9 +318,25 @@ div#userList {
 
 #userList > div > div.drivers:hover {
     background-color: rgba(0, 0, 0, .5);
-    cursor: pointer;
+    color: white;
 }
 
+
+.name-disclaimer {
+
+}
+
+.active-trip {
+    background-color: rgba(173, 255, 47, 0.40);
+}
+
+.account-disclaimer {
+    font-size: 10px;
+}
+
+.driver-pic {
+    border-radius: 50%;
+}
 
 @media only screen and (max-width: 640px) {
     aside {
