@@ -226,6 +226,7 @@ div#userList {
     margin: 20px 0;
     padding: 10px 20px;
     cursor: pointer;
+    background-color: yellowgreen;
 
 }
 
@@ -252,6 +253,11 @@ div#userList {
 
 .driverText {
     height: 100%;
+}
+
+#driverName {
+    padding-left: 8px;
+    padding-top: 0;
 }
 
 .disclaimer {
@@ -372,14 +378,19 @@ div.col-12.alertList > div {
     height: 25px;
     position: absolute;
     right: 5px;
-    background-image: url("./close.svg");
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 720px) {
     aside {
         display: none !important;
     }
+
+    #userList {
+        display: none;
+    }
 }
+
+
 
 
 #popup {
@@ -395,4 +406,28 @@ div.col-12.alertList > div {
     margin: auto;
     left: 0;
     right: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+#yes, #no {
+    width: 100px;
+    height: 50px;
+    margin: 20px;
+    float: right;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px 1px gainsboro;
+
+    border: 0;
+
+}
+
+#yes {
+    background-color: rgba(68, 193, 255, 0.2);
+}
+
+#no {
+    background-color: rgba(255, 58, 85, 0.2);
 }

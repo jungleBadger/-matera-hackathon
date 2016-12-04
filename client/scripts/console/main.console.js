@@ -10,6 +10,8 @@
         ladda = require("ladda"),
         toastr = require("toastr");
 
+    console.log(ladda);
+
     var manipulatedAccount;
 
     var properties = {
@@ -294,6 +296,8 @@
 
     methods.init();
 
+
+    ladda.bind(document.getElementById("yes"));
 
     $("#yes").click(function () {
         factory.payAccount(manipulatedAccount).then(function (data) {
