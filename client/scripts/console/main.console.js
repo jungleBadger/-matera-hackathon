@@ -24,6 +24,11 @@
         "addUserListAction": function (userEl, userInfo) {
             methods.changeBalanceInfo().changeDriverNameInfo();
             userEl.addEventListener("click", function () {
+                factory.getTripsByDriver(userInfo.accountId).then(function (tripsArr) {
+                    console.log(tripsArr);
+                }, function (err) {
+                    console.log(err);
+                });
                 factory.getUserBalance(userInfo.accountId).then(function (data) {
                     try {
                         methods.changeBalanceInfo(["R$ ", data.balances[1].amount.toLocaleString()].join("")).changeDriverNameInfo(userInfo.username);
@@ -40,7 +45,13 @@
         "addTripAction": function () {
             properties.insertTripForm.addEventListener("submit", function (el) {
                 el.preventDefault();
-                console.log($("#sendTripForm").serialize());
+                factory.insertTrip($("#sendTripForm").serialize()).then(function (data) {
+                    console.log(data);
+                    console.log("saved successfully");
+                }, function (err) {
+                    console.log(err);
+                });
+
             });
         }
     };
@@ -58,6 +69,8 @@
             var docFragment = document.createDocumentFragment();
             itemArray.forEach(function (item) {
                 var option = document.createElement("option");
+                option.value = item.accountId || item.placa;
+                option.attributes.value = item.accountId || item.placa;
                 option.appendChild(document.createTextNode(item.username || item.placa));
                 docFragment.appendChild(option);
             });

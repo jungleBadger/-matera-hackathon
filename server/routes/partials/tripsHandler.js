@@ -25,10 +25,10 @@
             });
         });
 
-        app.get("/getTripByDriver", function (req, res) {
+        app.get("/getTripByDriver/:accountId", function (req, res) {
             tripsDB.find({
                 "selector": {
-                    "accountId": req.body.accountId
+                    "accountId": req.params.accountId
                 }
             }, function (err, data) {
                 console.log(err, data);
@@ -44,6 +44,7 @@
 
 
         app.post('/insertTrip', function (req, res) {
+            req.body.status = "active";
             process.nextTick(function () {
                 tripsDB.insert(req.body, function (err) {
                     if (err) {

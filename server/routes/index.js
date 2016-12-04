@@ -8,7 +8,8 @@
         deviceRoutes = require("./partials/deviceHandler"),
         brokerRoutes = require("./partials/brokerHandler"),
         truckRoutes = require("./partials/truckHandler"),
-        driverRoutes = require("./partials/driverHandler");
+        driverRoutes = require("./partials/driverHandler"),
+        tripsRoutes = require("./partials/tripsHandler");
 
     module.exports = function (app, io, request, materaMP, iotf_connections, iotf_configs, passport, Cloudant, UserSchema) {
         loginRoutes(app, passport);
@@ -19,6 +20,7 @@
         brokerRoutes(app, iotf_connections, io);
         truckRoutes(app, Cloudant);
         driverRoutes(app, Cloudant, materaMP, UserSchema);
+        tripsRoutes(app, Cloudant);
     };
 
 }());

@@ -56,6 +56,31 @@
                         reject(err);
                     });
                 });
+            },
+            "getTripsByDriver": function (accountId) {
+                return new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: ['/getTripByDriver/', accountId].join(""),
+                        method: 'get'
+                    }).done(function(param){
+                        resolve(param);
+                    }).fail(function (err) {
+                        reject(err);
+                    });
+                });
+            },
+            "insertTrip": function (tripObj) {
+                return new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: '/insertTrip',
+                        method: 'post',
+                        data: tripObj
+                    }).done(function(param){
+                        resolve(param);
+                    }).fail(function (err) {
+                        reject(err);
+                    });
+                });
             }
         }
     };
