@@ -22,15 +22,48 @@
                 <li>
                     Cadastro Postos
                 </li>
+                <li>
+                    <a href="#" data-tab="3" class="tab">Cadastro Viagens</a>
+                </li>
             </ul>
 
         </aside>
 
         <main id="tst">
+
             <div data-content="1" class="contentx active">
-                <header>
-                    <h2>Dashboard</h2>
-                </header>
+                <div class="row">
+                    <div class="col-10 column">
+                        <header class="col-12">
+                            <h2>Dashboard</h2>
+                        </header>
+                        <div class="col-12 driverHeader">
+                            <div class="col-3 driverText">
+                                <h3 id="driverName"></h3>
+                            </div>
+                            <div class="col-3 driverText">
+                                <div class="col-3 driverText">
+                                    <h2 id="driverBalance"></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 driverFeed">
+                            <div class="col-2 driverAlerts">
+                                <div class="col-12 alertList">
+                                    <!-- <button type="button" name="button">Alert 1</button> -->
+                                    Alert 1
+                                </div>
+                            </div>
+                            <div class="col-10 driverMap" id="map"></div>
+                        </div>
+                    </div>
+                    <div class="col-2" id="userList">
+                        <div class="drivers">
+                            <h3>Lista de Motoristas</h3>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div data-content="2" class="contentx">
@@ -41,42 +74,79 @@
                     <div>
                         <section class="firstGroup">
                             <label for="driverName">Nome:</label>
-                            <input type="text" name="driverName" id="fullName" />
+                            <input type="text" name="driverName" id="driverName" required>
                             <label for="phoneNumber">Telefone</label>
-                            <input type="text" name="phoneNumber" value="" id="phoneNumber">
+                            <input type="text" name="phoneNumber" value="" id="phoneNumber" class="smallerField" required>
                             <label for="phoneNumber">Celular</label>
-                            <input type="text" name="cellPhone" value="" id="cellPhone">
+                            <input type="text" name="cellPhone" value="" id="cellPhone" class="smallerField" required>
                             <label for="email">Email</label>
-                            <input type="text" name="email" value="" id="email">
+                            <input type="text" name="email" value="" id="email" required>
                             <label for="">CPF</label>
-                            <input type="text" name="cpf" value="" id="cpf">
+                            <input type="text" name="cpf" value="" id="cpf" class="smallerField" required>
                         </section>
 
                         <label for="">Endereço</label>
-                        <input type="text" name="address" value="">
+                        <input type="text" name="address" value="" id="address" required>
+
                         <label for="">Número</label>
-                        <input type="text" name="housenumber" value="" id="houseNumber">
+                        <input type="text" name="houseNumber" value="" id="houseNumber" required>
                         <label for="">Complemento</label>
-                        <input type="text" name="name" value="" id="">
+                        <input type="text" name="complement" value="" id="complement" required>
+
+
                         <label for="">Bairro</label>
-                        <input type="text" name="name" value="">
+                        <input type="text" name="neighborhood" value="" id="neighborhood" required>
                         <label for="">Cidade</label>
-                        <input type="text" name="name" value="">
+                        <input type="text" name="city" value="" id="city" required>
                         <label for="">Estado</label>
-                        <input type="text" name="name" value="">
+                        <input type="text" name="state" value="" id="state" required>
                         <label for="">CEP</label>
-                        <input type="text" name="name" value="">
+                        <input type="text" name="zipCode" value="" id="zipCode" required>
                         <label for="country">País</label>
-                        <input type="text" name="country" value="">
-
-
+                        <input type="text" name="country" value="" id="country" required>
                     </div>
+
                     <input type="submit" value="Cadastrar" id="insertDriver" />
+                </form>
+            </div>
+            <div data-content="3" class="contentx">
+                <header>
+                    <h2>Cadastro de Viagem</h2>
+                </header>
+
+                <form action="#" method="post" id="sendTripForm" class="tripPaymentInfo" datatype="x-">
+                    <label for="origem">Origem</label>
+                    <input type="text" name="origem" id="origem">
+                    <label for="destino">Destino</label>
+                    <input type="text" name="destino" id="destino">
+                    <label for="departure">Data de Partida</label>
+                    <input type="text" name="departure" id="departure">
+                    <label for="departureTime">Hora de Partida</label>
+                    <input type="text" name="departureTime" id="departureTime">
+                    <label for="EDA">Data de Chegada</label>
+                    <input type="text" name="EDA" id="EDA">
+                    <label for="ETA">Hora de Chegada</label>
+                    <input type="text" name="ETA" id="ETA">
+                    <label for="payment">Valor do Pagamento</label>
+                    <input type="text" name="payment" id="payment">
+                    <label for="accountId">Motorista</label>
+                    <input type="text" name="accountId" id="accountId" list="drivers">
+                    <datalist id="drivers">
+                    </datalist>
+                    <label for="truck">Caminhão</label>
+                    <input type="text" name="truck" id="truck" list="trucks">
+                    <datalist id="trucks">
+                    </datalist>
+                    <input type="submit" name="tripInfo" value="Cadastrar" id="tripInfo">
+
                 </form>
             </div>
 
         </main>
 
-        <script async src="../dist/main.console.min.js"></script>
+
+        <script defer src="../dist/main.console.min.js"></script>
+        <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxeqlspQ8o6zTVZ0dLccGQ1m2qV17pv-Q"></script>
+
     </body>
 </html>

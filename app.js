@@ -18,6 +18,7 @@
         Cloudant = require('./server/configs/cloudant').init,
         compress = require("compression"),
         morgan = require("morgan"),
+        UserSchema = require('./server/helpers/user'),
         server = require("http").createServer(app),
         bodyParser = require("body-parser"),
         io = require("socket.io")(server),
@@ -54,7 +55,7 @@
     app.set("view engine", "html");
 
     require("./server/helpers/passport")(passport, Cloudant);
-    require("./server/routes/index.js")(app, io, request, materaMP, iotf_connections, iotf_configs, passport, Cloudant);
+    require("./server/routes/index.js")(app, io, request, materaMP, iotf_connections, iotf_configs, passport, Cloudant, UserSchema);
 
     server.listen(appEnv.port, "0.0.0.0", function () {
         console.log("server starting on " + appEnv.url);

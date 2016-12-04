@@ -9,7 +9,7 @@
             defaults: function buildObject () {
                 return {
                     "org": process.env.IOTF_ORG || JSON.parse(process.env.VCAP_SERVICES)["iotf-service"][0].credentials.org,
-                    "id": "a-bpvobx-hpcxylqxb8",
+                    "id": "a-70aie6-547phbjjqo",
                     "type": "raspberry",
                     "auth-method": "token",
                     "auth-key": process.env.IOTF_KEY || JSON.parse(process.env.VCAP_SERVICES)["iotf-service"][0].credentials.apiKey,

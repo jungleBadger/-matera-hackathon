@@ -17,12 +17,15 @@
             createConnection: function () {
                 return new Promise(function (resolve, reject) {
                     var appClientConfig = {
-                        "org": "bpvobx",
-                        "id": "hpcxylqxb8",
+                        "org": "70aie6",
+                        "id": "a2g6k39sl6r5",
+                        "auth-method" : "token",
                         "auth-key": process.env.IOTF_KEY || JSON.parse(process.env.VCAP_SERVICES)["iotf-service"][0].credentials.apiKey,
                         "auth-token": process.env.IOTF_TOKEN || JSON.parse(process.env.VCAP_SERVICES)["iotf-service"][0].credentials.apiToken
                     };
+
                     var mqttApp = new mqtt.IotfApplication(appClientConfig);
+                    mqttApp.log.setLevel('trace');
                     mqttApp.connect();
 
                     mqttApp.on('connect', function () {
@@ -59,9 +62,9 @@
             },
             closeConnection: function (mqttInstance) {
                 return new Promise(function (resolve, reject) {
-                    mqttInstance.end(false, function cb() {
-                        resolve('Client disconnected');
-                    });
+                    mqttInstance.disconnect();
+                    mqttInstance = "";
+                    resolve("");
                 });
             }
         }
