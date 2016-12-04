@@ -19,15 +19,20 @@
         "trucksListEl": document.getElementById("trucks"),
         "driverBalanceEl": document.getElementById("driverBalance"),
         "driverNameEl": document.getElementById("driverName"),
-        "insertTripForm": document.getElementById("sendTripForm")
+        "insertTripForm": document.getElementById("sendTripForm"),
+        "driverAlertsListEl": document.querySelector(".driverAlerts")
     };
 
+    console.log(properties);
     var handlers = {
         "addUserListAction": function (userEl, userInfo) {
             methods.changeBalanceInfo().changeDriverNameInfo();
             userEl.addEventListener("click", function () {
+                methods.removeDOMElement(properties.driverAlertsListEl);
                 factory.getTripsByDriver(userInfo.accountId).then(function (tripsArr) {
-                    console.log(tripsArr);
+                    tripsArr.forEach(function (trip) {
+                        properties.driverAlertsListEl.appendChild(methods.buildTripList(trip));
+                    });
                 }, function (err) {
                     console.log(err);
                 });
@@ -53,12 +58,43 @@
                 }, function (err) {
                     console.log(err);
                 });
-
+            });
+        },
+        "addTripListAction": function (tripEl, tripObj) {
+            tripEl.addEventListener("click", function () {
+                console.log(tripObj);
+                methods.loadMap(JSON.parse(tripObj.vehicleTrail[0].location).latitude, JSON.parse(tripObj.vehicleTrail[0].location).longitude)
             });
         }
     };
-
+    // <div cl/*ass="col-12 alertList">
+    //     <!-- <button type="button" name="button">Alert 1</button> -->
+    // Alert 1
+    // </div>*/
     var methods = {
+        "loadMap": function (lat, long) {
+
+            var uluru = { lat: lat, lng: long };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: uluru
+            });
+
+        },
+        "removeDOMElement": function (el) {
+            while (el.firstChild) {
+                el.removeChild(el.firstChild);
+            }
+
+        },
+        "buildTripList": function (trip) {
+            var div = document.createElement("div");
+            div.classList.add("col-12");
+            div.classList.add("alertList");
+            div.appendChild(document.createTextNode(trip.truck));
+            handlers.addTripListAction(div, trip);
+            return div;
+        },
         "changeDriverNameInfo": function (name) {
             properties.driverNameEl.innerHTML = name || "";
             return this;
