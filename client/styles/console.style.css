@@ -230,27 +230,28 @@ div#userList {
 }
 
 .driverHeader {
-    background-color: red;
+    background-color: #ECF0F2;
     height: 140px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border: 1px solid lightgray;
 }
 
 .driverText {
-    background-color: blue;
+    background-color: #ECF0F2;
     height: 100%;
 }
 
 .driverFeed {
-    background-color: yellow;
+    background-color: #ECF0F2;
     height: 100%;
     display: flex;
     flex-direction: row;
 }
 
 .driverAlerts {
-    background-color: green;
+    background-color: #ECF0F2;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -262,5 +263,46 @@ div#userList {
 }
 
 .alertList {
-    height: 20px;
+    height: 40px;
+    border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+}
+
+.alertList button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: #ECF0F2;
+    outline: none;
+}
+
+.alertList:active {
+    box-shadow: 1px 1px 1px 1px black;
+}
+
+#sendTripForm {
+   width: 50%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   padding-left: 10px;
+   padding-top: 10px;
+}
+
+#sendTripForm div input {
+    width: 150px;
+    height: 30px;
+}
+
+.tripPaymentInfo {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#tripInfo {
+    padding-top: 10px;
+    width: 90px;
+    height: 30px;
 }

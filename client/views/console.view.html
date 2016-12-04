@@ -22,11 +22,15 @@
                 <li>
                     Cadastro Postos
                 </li>
+                <li>
+                    <a href="#" data-tab="3" class="tab">Cadastro Viagens</a>
+                </li>
             </ul>
 
         </aside>
 
         <main id="tst">
+
             <div data-content="1" class="contentx active">
                 <div class="row">
                     <div class="col-10 column">
@@ -35,19 +39,20 @@
                         </header>
                         <div class="col-12 driverHeader">
                             <div class="col-3 driverText">
-                                <h3>Full Name</h3>
-                                <h2>Scania [PLACA]</h2>
+                                <h3>Aléxia Balionis</h3>
+                                <h2>FBT 9984</h2>
                             </div>
                             <div class="col-3 driverText">
                                 <div class="col-3 driverText">
                                     <h3>Saldo</h3>
-                                    <h2>[VALOR]</h2>
+                                    <h2>10.000</h2>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 driverFeed">
                             <div class="col-2 driverAlerts">
                                 <div class="col-12 alertList">
+                                    <!-- <button type="button" name="button">Alert 1</button> -->
                                     Alert 1
                                 </div>
                             </div>
@@ -108,11 +113,34 @@
                         <input type="text" name="zipCode" value="" id="zipCode" required>
                         <label for="country">País</label>
                         <input type="text" name="country" value="" id="country" required>
-
-
-
                     </div>
+
                     <input type="submit" value="Cadastrar" id="insertDriver" />
+                </form>
+            </div>
+            <div data-content="3" class="contentx">
+                <header>
+                    <h2>Cadastro de Viagem</h2>
+                </header>
+
+
+                <form class="" action="" method="post" id="sendTripForm">
+                    <div class="tripPaymentInfo">
+                        <label for="Origem">Origem</label>
+                        <input type="text" name="origem" value="">
+                        <label for="Destino">Destino</label>
+                        <input type="text" name="destino" value="">
+                        <label for="Departure">Data de Partida</label>
+                        <input type="text" name="departure" value="">
+                        <label for="Payment">Pagamento</label>
+                        <input type="text" name="payment" value="">
+                        <label for="UserID">Motorista</label>
+                        <input type="text" name="UserID" value="">
+                        <label for="Truck">Caminhão</label>
+                        <input type="text" name="Truck" value="">
+                    </div>
+                    <input type="submit" name="tripInfo" value="Cadastrar" id="tripInfo">
+
                 </form>
             </div>
 
