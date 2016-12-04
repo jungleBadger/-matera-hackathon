@@ -42,9 +42,35 @@
             });
         });
 
+        app.get("/finishTrip/:accountId", function (req, res) {
+            tripsDB.find({
+                "selector": {
+                    "accountId": req.params.accountId
+                }
+            }, function (err, data) {
+                console.log(err, data);
+                if (!err) {
+                    if (data.docs[0]) {
+                        data.docs[0].status = "finished";
+                        tripsDB.insert(data.docs, function (err) {
+                            if (err) {
+                                return res.status(500).send('Ocorreu um erro inesperado');
+                            }
+
+                            return res.status(201).send('Caminhão inserido');
+
+                        });
+                    } else {
+                        return res.status(404).send("not found");
+                    }
+                }
+            });
+        });
+
 
         app.post('/insertTrip', function (req, res) {
             req.body.status = "active";
+            //chamar a api com os parametros req.body.destino e inicio, atualizar o objeto req.body.partida = {lat: long:}
             process.nextTick(function () {
                 tripsDB.insert(req.body, function (err) {
                     if (err) {
