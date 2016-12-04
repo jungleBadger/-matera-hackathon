@@ -31,7 +31,7 @@
                         }
                     }, function (error, response, body) {
                         if (!error) {
-                            resolve(response);
+                            resolve(JSON.parse(body).data);
                         } else {
                             reject(error);
                         }

@@ -9,13 +9,33 @@
 
         var userDB = Cloudant.use("users");
 
-        app.post("/insertDriver", function (req, res) {
-            console.log(req.body);
-            return res.status(200).send("will insert");
+
+        app.get("/getAllDrivers", function (req, res) {
+            userDB.find({
+                "selector": {
+                    "username": {
+                        "$gt": null
+                    }
+                }
+            }, function (err, data) {
+                console.log(err, data);
+                if (!err) {
+                    if (data.docs) {
+                        return res.status(200).send(data.docs);
+                    }
+                }
+            });
         });
 
+        app.get("/getUserDetails/:accountId", function (req, res) {
+            materaMP.getAccountDetails(req.params.accountId).then(function (user) {
+                return res.status(200).send(user);
+            }, function (error) {
+                return res.status(500).send(error);
+            });
+        });
 
-        app.post('/signup', function (req, res) {
+        app.post('/insertDriver', function (req, res) {
             if (!req.body.CPF) {
                 return res.status(400).send('Não é possível prosseguir sem um CPF');
             }
