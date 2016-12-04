@@ -11,5 +11,13 @@
                 return res.status(500).send(error);
             });
         });
+
+        app.post("/deposit", function (req, res) {
+            materaMP.postDeposit(req.body).then(function successCB(data) {
+                return res.status(200).send(data);
+            }, function errorCB(error) {
+                return res.status(500).send(error);
+            });
+        });
     };
 }());

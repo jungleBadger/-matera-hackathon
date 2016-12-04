@@ -76,6 +76,37 @@
                     });
                 });
             },
+            "postDeposit": function (data) {
+                var self = this;
+                return new Promise(function (resolve, reject) {
+
+                    var recipientsAccountIdAmount = "";
+
+                    data.recipients.forEach(function (recipient) {
+                        recipientsAccountIdAmount = recipientsAccountIdAmount + recipient.account.accountId +
+                            Math.floor(recipient.amount);
+                    });
+
+                    var jsonbody = JSON.stringify(data);
+                    request({
+                        "url": url + apiAccount + "deposits",
+                        "method": "POST",
+                        "headers": {
+                            "Api-Access-Key": apiAccessKey,
+                            "Transaction-Hash": self.generateHash([recipientsAccountIdAmount]),
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        },
+                        "body": jsonbody
+                    }, function (error, response, body) {
+                        if (!error) {
+                            resolve(response);
+                        } else {
+                            reject(error);
+                        }
+                    });
+                });
+            },
             "postPayment": function (data) {
                 var self = this;
                 return new Promise(function (resolve, reject) {
@@ -145,5 +176,5 @@
                 });
             }
         };
-    };
+        };
 }());
