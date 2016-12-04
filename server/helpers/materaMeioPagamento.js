@@ -112,7 +112,7 @@
                 return new Promise(function (resolve, reject) {
 
                     var accountId = data.sender.account.accountId ? data.sender.account.accountId : data.paymentInfo.creditCard.holderTaxId,
-                        cardId = data.paymentInfo.creditCard.cardNumber,
+                        cardId = data.paymentInfo.creditCard ? data.paymentInfo.creditCard.cardNumber : "",
                         totalAmount = data.totalAmount,
                         recipientsAccountIdAmount = "";
 
