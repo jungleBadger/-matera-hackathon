@@ -110,9 +110,15 @@
             },
             "postCreateAccount": function (data) {
                 var self = this;
-                var valoresHash = [data.body.externalIdentifier, data.body.client.taxIdentifier.taxId];
 
                 return new Promise(function (resolve, reject) {
+
+                    try {
+                        var valoresHash = [data.body.externalIdentifier, data.body.client.taxIdentifier.taxId];
+                    } catch (e) {
+                        reject("invalid value");
+                    }
+
                     var jsonbody = JSON.stringify(data.body);
                     var req = {
                         "url": url + apiAccount,
